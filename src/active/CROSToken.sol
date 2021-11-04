@@ -6,7 +6,6 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
 contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
-
   uint256 private constant _NOMINATOR = 10000;
   uint256 public supply;
 
@@ -31,7 +30,6 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   uint256 public advisorsWithdraw;
   uint256 public ecoSystemFundsWithdraw;
 
-
   // percentages
   uint256 private constant MARKETING_DEVELOPMENT_PERCENTAGE = 1500;
   uint256 private constant PRIVATE_SALE_PERCENTAGE = 830;
@@ -43,16 +41,18 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   uint256 private constant ADVISORS_PERCENTAGE = 800;
   uint256 private constant ECOSYSTEM_FUNDS_PERCENTAGE = 2900;
 
-  function __CROSToken_init(uint256 _supply,
-  address _marketingDevelopment,
-  address _privateSale,
-  address _publicSale,
-  address _treasury,
-  address _floatLiquiditory,
-  address _liquidityMining,
-  address _team,
-  address _advisors,
-  address _ecoSystemFunds) public initializer {
+  function __CROSToken_init(
+    uint256 _supply,
+    address _marketingDevelopment,
+    address _privateSale,
+    address _publicSale,
+    address _treasury,
+    address _floatLiquiditory,
+    address _liquidityMining,
+    address _team,
+    address _advisors,
+    address _ecoSystemFunds
+  ) public initializer {
     __Ownable_init();
     __ERC20_init("CROS", "CROS");
     supply = _supply;
@@ -74,7 +74,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawMarketingDevelopmentFunds(uint256 _amount) external {
     require(msg.sender == marketingDevelopment, "wrong owner");
 
-    uint256 total = (supply * MARKETING_DEVELOPMENT_PERCENTAGE)/_NOMINATOR;
+    uint256 total = (supply * MARKETING_DEVELOPMENT_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - marketingDevelopmentWithdraw), "wrong amount");
 
     _mint(marketingDevelopment, _amount);
@@ -88,7 +88,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawPrivateSaleFunds(uint256 _amount) external {
     require(msg.sender == privateSale, "wrong owner");
 
-    uint256 total = supply * PRIVATE_SALE_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * PRIVATE_SALE_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - privateSaleWithdraw), "wrong amount");
 
     _mint(privateSale, _amount);
@@ -102,7 +102,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawPublicSaleFunds(uint256 _amount) external {
     require(msg.sender == publicSale, "wrong owner");
 
-    uint256 total = supply * PUBLIC_SALE_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * PUBLIC_SALE_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - publicSaleWithdraw), "wrong amount");
 
     _mint(publicSale, _amount);
@@ -116,7 +116,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawTreasuryFunds(uint256 _amount) external {
     require(msg.sender == treasury, "wrong owner");
 
-    uint256 total = supply * TREASURY_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * TREASURY_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - treasuryWithdraw), "wrong amount");
 
     _mint(treasury, _amount);
@@ -130,7 +130,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawFloatLiquidityFunds(uint256 _amount) external {
     require(msg.sender == floatLiquiditory, "wrong owner");
 
-    uint256 total = supply * FLOAT_LIQUIDITY_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * FLOAT_LIQUIDITY_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - floatLiquidityWithdraw), "wrong amount");
 
     _mint(floatLiquiditory, _amount);
@@ -144,7 +144,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawLiquidityMiningFunds(uint256 _amount) external {
     require(msg.sender == liquidityMining, "wrong owner");
 
-    uint256 total = supply * LIQUIDITY_MINING_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * LIQUIDITY_MINING_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - liquidityMiningWithdraw), "wrong amount");
 
     _mint(liquidityMining, _amount);
@@ -158,7 +158,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawTeamFunds(uint256 _amount) external {
     require(msg.sender == team, "wrong owner");
 
-    uint256 total = supply * TEAM_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * TEAM_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - teamWithdraw), "wrong amount");
 
     _mint(team, _amount);
@@ -172,7 +172,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawAdvisorsFunds(uint256 _amount) external {
     require(msg.sender == advisors, "wrong owner");
 
-    uint256 total = supply * ADVISORS_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * ADVISORS_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - advisorsWithdraw), "wrong amount");
 
     _mint(advisors, _amount);
@@ -186,7 +186,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   function withdrawEcosystemFunds(uint256 _amount) external {
     require(msg.sender == ecoSystemFunds, "wrong owner");
 
-    uint256 total = supply * ECOSYSTEM_FUNDS_PERCENTAGE/_NOMINATOR;
+    uint256 total = (supply * ECOSYSTEM_FUNDS_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - ecoSystemFundsWithdraw), "wrong amount");
 
     _mint(ecoSystemFunds, _amount);
