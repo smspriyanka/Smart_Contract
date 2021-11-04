@@ -1,0 +1,17 @@
+{
+  "solidity.compileUsingRemoteVersion": "0.8.9",
+  "editor.formatOnSave": true,
+  "solidity.formatter": "prettier",
+  "[solidity]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "bignumber",
+    "Blnc",
+    "bscscan",
+    "confs",
+    "mixedcase",
+    "solhint",
+    "websockets"
+  ]
+}
