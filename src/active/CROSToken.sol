@@ -13,7 +13,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
   address public privateSale;
   address public publicSale;
   address public treasury;
-  address public floatLiquiditory;
+  address public floatLiquidity;
   address public liquidityMining;
   address public team;
   address public advisors;
@@ -47,7 +47,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
     address _privateSale,
     address _publicSale,
     address _treasury,
-    address _floatLiquiditory,
+    address _floatLiquidity,
     address _liquidityMining,
     address _team,
     address _advisors,
@@ -60,7 +60,7 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
     privateSale = _privateSale;
     publicSale = _publicSale;
     treasury = _treasury;
-    floatLiquiditory = _floatLiquiditory;
+    floatLiquidity = _floatLiquidity;
     liquidityMining = _liquidityMining;
     team = _team;
     advisors = _advisors;
@@ -128,12 +128,12 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
    * @param _amount total amount to withdraw
    */
   function withdrawFloatLiquidityFunds(uint256 _amount) external {
-    require(msg.sender == floatLiquiditory, "wrong owner");
+    require(msg.sender == floatLiquidity, "wrong owner");
 
     uint256 total = (supply * FLOAT_LIQUIDITY_PERCENTAGE) / _NOMINATOR;
     require(_amount <= (total - floatLiquidityWithdraw), "wrong amount");
 
-    _mint(floatLiquiditory, _amount);
+    _mint(floatLiquidity, _amount);
     floatLiquidityWithdraw = floatLiquidityWithdraw + _amount;
   }
 
