@@ -107,8 +107,8 @@ module.exports = {
       network_id: 3,
       skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712,
-      gasPrice: 47000000000,
+      // gas: 4698712,
+      // gasPrice: 47000000000,
     },
     kovan: {
       provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),

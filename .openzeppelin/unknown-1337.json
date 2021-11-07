@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0x6c75798dd324972b84057F54f1dfA1184543b787",
-    "txHash": "0x00c61a4dd431ef9f61983247807a7d6429e4563397ac0c19dace096b5dae5c0f"
+    "address": "0xD52fEB218Ae5dFC875b024d73829D8722954B474",
+    "txHash": "0x397c7fa3dc063f4bdc82f853dcf73becdbb10817c80ef30c728541b84960ae5f"
   },
   "proxies": [
     {
@@ -783,6 +783,11 @@
     {
       "address": "0x5cc371B414fA647CaCDa2B0B8116313fAE154420",
       "txHash": "0xcddb01a5fe3107cba19b7f617c1c6b301dd97cd2a721920436ce84906b8b5ed6",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1e278Aadfa8abcf9fCC35CDE90F1b8C31B9AB0C2",
+      "txHash": "0x59dd5bc5dc9b5743ddf8b3613a32d6b5866e49e05f0307ca1bf30ff4d04d08f3",
       "kind": "transparent"
     }
   ],
@@ -1622,6 +1627,223 @@
             "label": "ecoSystemFundsWithdraw",
             "type": "t_uint256",
             "src": "CROSToken.sol:32"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_array(t_uint256)45_storage": {
+            "label": "uint256[45]"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "0be45c69b41bf5e076fa03091c4fcb035c03dcc01f4d7f4df10432dc60fc0dd4": {
+      "address": "0x0f9c447FF9b1E3dB1860F0616C8ED2Ba8e37bce6",
+      "txHash": "0x4a07bc9fca470c979e8dffee1b46a95b881f28aa97c6d08bdba5800b72413802",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:26"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:30"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:21"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:77"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:36"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_allowances",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:38"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_totalSupply",
+            "type": "t_uint256",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:40"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_name",
+            "type": "t_string_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:42"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_symbol",
+            "type": "t_string_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:43"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)45_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:361"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "supply",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:10"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "marketingDevelopment",
+            "type": "t_address",
+            "src": "CROSToken.sol:12"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "privateSale",
+            "type": "t_address",
+            "src": "CROSToken.sol:13"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "publicSale",
+            "type": "t_address",
+            "src": "CROSToken.sol:14"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "treasury",
+            "type": "t_address",
+            "src": "CROSToken.sol:15"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "floatLiquidity",
+            "type": "t_address",
+            "src": "CROSToken.sol:16"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "liquidityMining",
+            "type": "t_address",
+            "src": "CROSToken.sol:17"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "team",
+            "type": "t_address",
+            "src": "CROSToken.sol:18"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "advisors",
+            "type": "t_address",
+            "src": "CROSToken.sol:19"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "ecoSystemFunds",
+            "type": "t_address",
+            "src": "CROSToken.sol:20"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "marketingDevelopmentWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:23"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "privateSaleWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:24"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "publicSaleWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:25"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "treasuryWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:26"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "floatLiquidityWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:27"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "liquidityMiningWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:28"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "teamWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:29"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "advisorsWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:30"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "ecoSystemFundsWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:31"
           }
         ],
         "types": {

@@ -1,0 +1,74 @@
+
+
+
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 8000000 (0x7a1200)
+
+
+1_initial_upgrade_migration.js
+==============================
+Owner: 0x23570A88B04df537318d102Cc487492F1b4f7923
+
+   Deploying 'CROSToken'
+   ---------------------
+   > transaction hash:    0xfa9a439793355db68c890287a340621b8c374854f6d4005949875ae517a43290
+   > Blocks: 0            Seconds: 9
+   > contract address:    0x728409919373EF5caf341eaB4aBc46Bc4130aC4D
+   > block number:        11379625
+   > block timestamp:     1636284956
+   > account:             0x23570A88B04df537318d102Cc487492F1b4f7923
+   > balance:             0.93626266
+   > gas used:            1528824 (0x1753f8)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.03057648 ETH
+
+
+   Deploying 'ProxyAdmin'
+   ----------------------
+   > transaction hash:    0xa04a9a40ed87102ac8f6fb3860b82cf666e4c039caaaf3a4ea2352906ec09037
+   > Blocks: 1            Seconds: 29
+   > contract address:    0x4aB3270d6518cD5a257dFA88354bD3f8276Bb410
+   > block number:        11379626
+   > block timestamp:     1636285004
+   > account:             0x23570A88B04df537318d102Cc487492F1b4f7923
+   > balance:             0.92658226
+   > gas used:            484020 (0x762b4)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0096804 ETH
+
+
+   Deploying 'TransparentUpgradeableProxy'
+   ---------------------------------------
+   > transaction hash:    0x71b7185d91927ea3860339f7fe5ac12c365d96e6440f1fc4a96b6d4f59a059a0
+   > Blocks: 2            Seconds: 13
+   > contract address:    0x97aca6040E5edA7c56991cb70D4d9Ea4902761Ca
+   > block number:        11379628
+   > block timestamp:     1636285054
+   > account:             0x23570A88B04df537318d102Cc487492F1b4f7923
+   > balance:             0.90825848
+   > gas used:            916189 (0xdfadd)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01832378 ETH
+
+Token address: 0x97aca6040E5edA7c56991cb70D4d9Ea4902761Ca
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.05858066 ETH
+
+
+Summary
+=======
+> Total deployments:   3
+> Final cost:          0.05858066 ETH
+
+truffle run verify CROSToken@0x728409919373EF5caf341eaB4aBc46Bc4130aC4D --network ropsten
+
+Verifying CROSToken@0x728409919373EF5caf341eaB4aBc46Bc4130aC4D
+Pass - Verified: https://ropsten.etherscan.io/address/0x728409919373EF5caf341eaB4aBc46Bc4130aC4D#code
+Successfully verified 1 contract(s).

@@ -1,0 +1,233 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0x4aB3270d6518cD5a257dFA88354bD3f8276Bb410",
+    "txHash": "0xa04a9a40ed87102ac8f6fb3860b82cf666e4c039caaaf3a4ea2352906ec09037"
+  },
+  "proxies": [
+    {
+      "address": "0x97aca6040E5edA7c56991cb70D4d9Ea4902761Ca",
+      "txHash": "0x71b7185d91927ea3860339f7fe5ac12c365d96e6440f1fc4a96b6d4f59a059a0",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "0be45c69b41bf5e076fa03091c4fcb035c03dcc01f4d7f4df10432dc60fc0dd4": {
+      "address": "0x728409919373EF5caf341eaB4aBc46Bc4130aC4D",
+      "txHash": "0xfa9a439793355db68c890287a340621b8c374854f6d4005949875ae517a43290",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:26"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:30"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:21"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:77"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:36"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_allowances",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:38"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_totalSupply",
+            "type": "t_uint256",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:40"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_name",
+            "type": "t_string_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:42"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "_symbol",
+            "type": "t_string_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:43"
+          },
+          {
+            "contract": "ERC20Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)45_storage",
+            "src": "../../@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol:361"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "supply",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:10"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "marketingDevelopment",
+            "type": "t_address",
+            "src": "CROSToken.sol:12"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "privateSale",
+            "type": "t_address",
+            "src": "CROSToken.sol:13"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "publicSale",
+            "type": "t_address",
+            "src": "CROSToken.sol:14"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "treasury",
+            "type": "t_address",
+            "src": "CROSToken.sol:15"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "floatLiquidity",
+            "type": "t_address",
+            "src": "CROSToken.sol:16"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "liquidityMining",
+            "type": "t_address",
+            "src": "CROSToken.sol:17"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "team",
+            "type": "t_address",
+            "src": "CROSToken.sol:18"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "advisors",
+            "type": "t_address",
+            "src": "CROSToken.sol:19"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "ecoSystemFunds",
+            "type": "t_address",
+            "src": "CROSToken.sol:20"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "marketingDevelopmentWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:23"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "privateSaleWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:24"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "publicSaleWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:25"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "treasuryWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:26"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "floatLiquidityWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:27"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "liquidityMiningWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:28"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "teamWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:29"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "advisorsWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:30"
+          },
+          {
+            "contract": "CROSToken",
+            "label": "ecoSystemFundsWithdraw",
+            "type": "t_uint256",
+            "src": "CROSToken.sol:31"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_array(t_uint256)45_storage": {
+            "label": "uint256[45]"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    }
+  }
+}
