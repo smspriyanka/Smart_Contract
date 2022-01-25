@@ -4,9 +4,9 @@ Its a token that distributed in following addresses and every address can call w
 
 ##### Marketing Development => 15%
 
-##### Private Sale => 8.3%
+##### Private Sale => 11%
 
-##### Public Sale => 1.7%
+##### Public Sale => 2%
 
 ##### Treasury => 10%
 
@@ -14,11 +14,11 @@ Its a token that distributed in following addresses and every address can call w
 
 ##### Liquidity Mining => 15%
 
-##### Team => 11%
+##### Team => 15%
 
-##### Advisors => 8%
+##### Advisors => 4%
 
-##### EcoSystemFunds => 29%
+##### EcoSystemFunds => 26%
 
 Please note that a address can't withdraw or mint more then its allocation, here are the withdraw function (only executed by an address that have rights)
 
@@ -40,7 +40,7 @@ Please note that a address can't withdraw or mint more then its allocation, here
 
 ##### withdrawEcosystemFunds
 
-Every function have \_amount parameter, for example treasure has the allocation is 10% and total supply is 300 million so treasury address can't mint more than 30 million (10% of the total supply) however address can withdraw amount multiple times and contract keep recording of amount withdraw
+Every function have \_amount parameter, for example treasure has the allocation is 10% and total supply is 1 Billion so treasury address can't mint more than 100 million (10% of the total supply) however address can withdraw amount multiple times and contract keep recording of amount withdraw
 
 # Installation
 
