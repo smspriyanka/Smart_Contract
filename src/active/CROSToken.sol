@@ -32,14 +32,34 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
 
   // percentages
   uint256 private constant MARKETING_DEVELOPMENT_PERCENTAGE = 1500;
-  uint256 private constant PRIVATE_SALE_PERCENTAGE = 830;
-  uint256 private constant PUBLIC_SALE_PERCENTAGE = 170;
+  uint256 private constant PRIVATE_SALE_PERCENTAGE = 1100;
+  uint256 private constant PUBLIC_SALE_PERCENTAGE = 200;
   uint256 private constant TREASURY_PERCENTAGE = 1000;
   uint256 private constant FLOAT_LIQUIDITY_PERCENTAGE = 200;
   uint256 private constant LIQUIDITY_MINING_PERCENTAGE = 1500;
-  uint256 private constant TEAM_PERCENTAGE = 1100;
-  uint256 private constant ADVISORS_PERCENTAGE = 800;
-  uint256 private constant ECOSYSTEM_FUNDS_PERCENTAGE = 2900;
+  uint256 private constant TEAM_PERCENTAGE = 1500;
+  uint256 private constant ADVISORS_PERCENTAGE = 400;
+  uint256 private constant ECOSYSTEM_FUNDS_PERCENTAGE = 2600;
+
+  uint256 private constant TEAM_ADVISOR_PERCENTAGE_RELEASE = 280;
+  uint256 private constant MARKETING_PERCENTAGE_RELEASE = 400;
+  uint256 private constant PRIVATE_SALE_PERCENTAGE_RELEASE = 750;
+  uint256 private constant TREASURY_PERCENTAGE_RELEASE = 400;
+  uint256 private constant ECOSYSTEM_FUNDS_PERCENTAGE_RELEASE = 400;
+  uint256 private constant LIQUIDITY_MINING_PERCENTAGE_RELEASE = 400;
+
+  uint256 public teamClaim;
+  uint256 public advisorsClaim;
+  uint256 public marketingDevelopmentClaim;
+  uint256 public privateSaleClaim;
+  uint256 public treasuryClaim;
+  uint256 public liquidityMiningClaim;
+  uint256 public ecoSystemFundsClaim;
+
+  bool public publicSaleClaim;
+  bool public floatLiquidityClaim; ///
+  uint256 public tge;
+  event Withdraw(uint256 month, uint256 timestamp, uint256 initialLocks);
 
   function __CROSToken_init(
     uint256 _supply,
@@ -65,131 +85,234 @@ contract CROSToken is Initializable, OwnableUpgradeable, ERC20Upgradeable {
     team = _team;
     advisors = _advisors;
     ecoSystemFunds = _ecoSystemFunds;
+    tge = block.timestamp;
   }
 
   /**
    * @dev withdraw markenting funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawMarketingDevelopmentFunds(uint256 _amount) external {
+  function withdrawMarketingDevelopmentFunds() external {
     require(msg.sender == marketingDevelopment, "wrong owner");
+    uint256 initialLocks = tge + (60 days);
+    require(block.timestamp > initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
+    require(totalMonths > marketingDevelopmentClaim, "try next month");
 
     uint256 total = (supply * MARKETING_DEVELOPMENT_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - marketingDevelopmentWithdraw), "wrong amount");
 
-    _mint(marketingDevelopment, _amount);
-    marketingDevelopmentWithdraw = marketingDevelopmentWithdraw + _amount;
+    uint256 amountToWithdraw = (total * MARKETING_PERCENTAGE_RELEASE) / _NOMINATOR;
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(marketingDevelopmentWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(marketingDevelopment, amountToWithdraw);
+
+    marketingDevelopmentWithdraw = marketingDevelopmentWithdraw + amountToWithdraw;
+    marketingDevelopmentClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 
   /**
    * @dev withdraw private sale funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawPrivateSaleFunds(uint256 _amount) external {
+  function withdrawPrivateSaleFunds() external {
     require(msg.sender == privateSale, "wrong owner");
+    uint256 initialLocks = tge;
+
+    require(block.timestamp >= initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
 
     uint256 total = (supply * PRIVATE_SALE_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - privateSaleWithdraw), "wrong amount");
 
-    _mint(privateSale, _amount);
-    privateSaleWithdraw = privateSaleWithdraw + _amount;
+    uint256 amountToWithdraw = (total * PRIVATE_SALE_PERCENTAGE_RELEASE) / _NOMINATOR;
+    if (privateSaleWithdraw == 0) {
+      amountToWithdraw = (total * 1000) / _NOMINATOR;
+    } else {
+      require(totalMonths > privateSaleClaim, "try next month");
+    }
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(privateSaleWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(privateSale, amountToWithdraw);
+
+    privateSaleWithdraw = privateSaleWithdraw + amountToWithdraw;
+    privateSaleClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 
   /**
    * @dev withdraw public sale funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawPublicSaleFunds(uint256 _amount) external {
+  function withdrawPublicSaleFunds() external {
     require(msg.sender == publicSale, "wrong owner");
 
     uint256 total = (supply * PUBLIC_SALE_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - publicSaleWithdraw), "wrong amount");
+    require(publicSaleClaim == false, "already claim");
 
-    _mint(publicSale, _amount);
-    publicSaleWithdraw = publicSaleWithdraw + _amount;
+    _mint(publicSale, total);
+    publicSaleClaim = true;
   }
 
   /**
    * @dev withdraw treasury funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawTreasuryFunds(uint256 _amount) external {
+  function withdrawTreasuryFunds() external {
     require(msg.sender == treasury, "wrong owner");
+    uint256 initialLocks = tge + (60 days);
+    require(block.timestamp > initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
+    require(totalMonths > treasuryClaim, "try next month");
 
     uint256 total = (supply * TREASURY_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - treasuryWithdraw), "wrong amount");
 
-    _mint(treasury, _amount);
-    treasuryWithdraw = treasuryWithdraw + _amount;
+    uint256 amountToWithdraw = (total * TREASURY_PERCENTAGE_RELEASE) / _NOMINATOR;
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(treasuryWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(treasury, amountToWithdraw);
+
+    treasuryWithdraw = treasuryWithdraw + amountToWithdraw;
+    treasuryClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 
   /**
    * @dev withdraw float liquidity funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawFloatLiquidityFunds(uint256 _amount) external {
+  function withdrawFloatLiquidityFunds() external {
     require(msg.sender == floatLiquidity, "wrong owner");
 
     uint256 total = (supply * FLOAT_LIQUIDITY_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - floatLiquidityWithdraw), "wrong amount");
+    require(floatLiquidityClaim == false, "already claim");
 
-    _mint(floatLiquidity, _amount);
-    floatLiquidityWithdraw = floatLiquidityWithdraw + _amount;
+    _mint(floatLiquidity, total);
+    floatLiquidityClaim = true;
   }
 
   /**
    * @dev withdraw liquidity mining funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawLiquidityMiningFunds(uint256 _amount) external {
+  function withdrawLiquidityMiningFunds() external {
     require(msg.sender == liquidityMining, "wrong owner");
+    uint256 initialLocks = tge + (60 days);
+    require(block.timestamp > initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
+    require(totalMonths > liquidityMiningClaim, "try next month");
 
     uint256 total = (supply * LIQUIDITY_MINING_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - liquidityMiningWithdraw), "wrong amount");
 
-    _mint(liquidityMining, _amount);
-    liquidityMiningWithdraw = liquidityMiningWithdraw + _amount;
+    uint256 amountToWithdraw = (total * LIQUIDITY_MINING_PERCENTAGE_RELEASE) / _NOMINATOR;
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(liquidityMiningWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(liquidityMining, amountToWithdraw);
+
+    liquidityMiningWithdraw = liquidityMiningWithdraw + amountToWithdraw;
+    liquidityMiningClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 
   /**
    * @dev withdraw team funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawTeamFunds(uint256 _amount) external {
+  function withdrawTeamFunds() external {
     require(msg.sender == team, "wrong owner");
+    uint256 initialLocks = tge + (360 days);
+    require(block.timestamp > initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
+    require(totalMonths > teamClaim, "try next month");
 
     uint256 total = (supply * TEAM_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - teamWithdraw), "wrong amount");
 
-    _mint(team, _amount);
-    teamWithdraw = teamWithdraw + _amount;
+    uint256 amountToWithdraw = (total * TEAM_ADVISOR_PERCENTAGE_RELEASE) / _NOMINATOR;
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(teamWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(team, amountToWithdraw);
+
+    teamWithdraw = teamWithdraw + amountToWithdraw;
+    teamClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 
   /**
    * @dev withdraw advisors funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawAdvisorsFunds(uint256 _amount) external {
+  function withdrawAdvisorsFunds() external {
     require(msg.sender == advisors, "wrong owner");
+    uint256 initialLocks = tge + (360 days);
+    require(block.timestamp > initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
+    require(totalMonths > advisorsClaim, "try next month");
 
-    uint256 total = (supply * ADVISORS_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - advisorsWithdraw), "wrong amount");
+    uint256 total = (supply * TEAM_PERCENTAGE) / _NOMINATOR;
 
-    _mint(advisors, _amount);
-    advisorsWithdraw = advisorsWithdraw + _amount;
+    uint256 amountToWithdraw = (total * TEAM_ADVISOR_PERCENTAGE_RELEASE) / _NOMINATOR;
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(advisorsWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(advisors, amountToWithdraw);
+
+    advisorsWithdraw = advisorsWithdraw + amountToWithdraw;
+    advisorsClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 
   /**
    * @dev withdraw ecosystem funds
-   * @param _amount total amount to withdraw
    */
-  function withdrawEcosystemFunds(uint256 _amount) external {
+  function withdrawEcosystemFunds() external {
     require(msg.sender == ecoSystemFunds, "wrong owner");
 
-    uint256 total = (supply * ECOSYSTEM_FUNDS_PERCENTAGE) / _NOMINATOR;
-    require(_amount <= (total - ecoSystemFundsWithdraw), "wrong amount");
+    uint256 initialLocks = tge + (60 days);
+    require(block.timestamp > initialLocks, "you cant withdraw");
+    uint256 totalMonths = (block.timestamp - initialLocks) / 30 days;
+    require(totalMonths > ecoSystemFundsClaim, "try next month");
 
-    _mint(ecoSystemFunds, _amount);
-    ecoSystemFundsWithdraw = ecoSystemFundsWithdraw + _amount;
+    uint256 total = (supply * ECOSYSTEM_FUNDS_PERCENTAGE) / _NOMINATOR;
+
+    uint256 amountToWithdraw = (total * ECOSYSTEM_FUNDS_PERCENTAGE_RELEASE) / _NOMINATOR;
+    uint256 amountAlreadyWithdraw = amountToWithdraw * totalMonths;
+
+    require(ecoSystemFundsWithdraw < total, "you already withdraw");
+    if (amountAlreadyWithdraw + amountToWithdraw > total) {
+      amountToWithdraw = amountAlreadyWithdraw + amountToWithdraw - total;
+    }
+
+    _mint(ecoSystemFunds, amountToWithdraw);
+
+    ecoSystemFundsWithdraw = ecoSystemFundsWithdraw + amountToWithdraw;
+    ecoSystemFundsClaim = totalMonths;
+
+    emit Withdraw(totalMonths, block.timestamp, initialLocks);
   }
 }
