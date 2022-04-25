@@ -1,0 +1,39 @@
+name: "Build & Push smart contract"
+
+jobs:
+  build-push:
+    name: "Build & push smart contract"
+    runs-on: ubuntu-latest
+
+    # Checkout source code
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    # Setup nodejs build
+    - name: Use Node.js 
+      uses: actions/setup-node@v2
+
+    # Setup yarn
+    - name: Install yarn
+      run: npm install -g yarn
+
+    # Cache dependencies for faster build time in future
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ./node_modules
+          ./.yarn
+        key: ${{ runner.os }}-modules-${{ hashFiles('./yarn.lock') }}
+
+    # Configure Git informations
+    - name: Configure Git informations
+      run: |
+        git config --global user.name $GITHUB_ACTOR
+        git config --global user.email $GITHUB_ACTOR@users.noreply.github.com
+
+    # Build the contracts
+    - name: Build contracts
+      run: |
+        yarn build
